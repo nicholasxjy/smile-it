@@ -1,0 +1,48 @@
+<% if (locals.recent_jokes && locals.recent_jokes.length > 0) { %>
+<% locals.recent_jokes.forEach(function(joke, index) { %>
+<div class="item">
+    <div class="item-body">
+        <div class="item-header">
+            <img src="<%= joke.author.profile_image_url %>" alt="60*60" title="<%= joke.author.name %>"
+                 class="img-responsive img-circle user-gravatar" width="50" height="50"/>
+            <div class="item-header-info">
+                <p><a class="item-user-name" href="/<%= joke.author.name %>/timeline"><%= joke.author.name %></a></p>
+                <p class="item-create-time">分享于 <%= joke.friendly_create_time %></p>
+            </div>
+        </div>
+        <div class="item-content">
+            <% if (joke.title) { %>
+            <h6><%= joke.title %></h6>
+            <% } %>
+            <% if (joke.content) { %>
+            <div class="item-content-content"><%= joke.content %></div>
+            <% } %>
+            <% if (joke.pictures && joke.pictures.length > 0) { %>
+                <div class="item-pictures">
+                    <a href="<%= joke.pictures[0] %>" class="fancybox" rel="gallery-<%= locals.currentpage %>-<%= index %>">
+                        <img class="img-responsive" src="<%= joke.pictures[0]  %>"
+                             alt="Share Photo"/>
+                    </a>
+                </div>
+            <% } %>
+            <p class="item-viewdetail"><a href="/joke/<%= joke._id %>">View details »</a></p>
+        </div>
+        <div class="item-footer">
+            <ul class="list-inline">
+                <li><a href="/joke/<%= joke._id %>" class="btn btn-sm btn-primary btn-comment">Comment</a></li>
+                <li class="like-list" data="<%= joke._id %>">
+                    <% if (joke.has_plus_one) { %>
+                        <a  class="btn btn-sm btn-primary" style="background-color: #d2322d;color: #ffffff;cursor: default;">+<%= joke.like_count %></a>
+                    <% } else { %>
+                        <a  id="<%= joke._id %>" class="btn btn-sm btn-primary btn-plus-like">+<%= joke.like_count %></a>
+                    <% } %>
+                </li>
+                <li><a href="/joke/<%= joke._id %>" class="btn btn-sm btn-primary btn-share">Share</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<% }); %>
+<% } %>
+
+

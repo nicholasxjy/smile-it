@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../meta.ejs %>
+    <link rel="stylesheet" href="css/assets/site.min.css"/>
+    <link rel="stylesheet" href="css/assets/sign.css"/>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/animatecss/3.1.0/animate.css">
+</head>
+<body class="signin-body" data-anijs="if:load, on: window, do: rotateIn animated, after: removeAnim, to: section">
+<div class="blur-wrap"></div>
+<section class="reset-pass-form">
+      <div class="form-title">
+          <h4>重置密码</h4>
+      </div>
+      <form  role="form" action="/reset-password" method="post">
+          <% if (locals.error) { %>
+          <div class="form-group">
+              <div class="alert alert-warning">
+                  <strong><%= locals.error %></strong>
+              </div>
+          </div>
+          <% } %>
+          <div class="form-group">
+              <label for="password" class="control-label">新密码</label>
+              <input type="password" class="form-control" name="pass" data-anijs="if:focus, do:pulse animated, after: removeAnim, to:.reset-pass-form" placeholder="请输入新密码">
+          </div>
+          <div class="form-group">
+              <label for="repassword" class="control-label">新密码</label>
+              <input type="password" class="form-control" name="repass" data-anijs="if:focus, do:flash animated, after: removeAnim, to:.reset-pass-form" placeholder="确定新密码">
+          </div>
+          <input type="hidden" name="name" value="<%= locals.name %>">
+          <input type="hidden" name="key" value="<%= locals.key %>">
+          <div class="form-group">
+              <button type="submit" class="btn btn-success">确定</button>
+        </div>
+    </form>
+</section>
+<script src="js/utils/anijs-min.js"></script>
+</body>
+</html>

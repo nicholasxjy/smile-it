@@ -1,0 +1,23 @@
+<% if (locals.current_user || locals.user) { %>
+<nav class="st-menu st-effect-1" id="menu-1">
+    <h2><em>Smile Everyday</em></h2>
+    <ul>
+        <li><a href="/"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+        <li><a href="/<%= locals.current_user.name || locals.user.name  %>/timeline"><span class="glyphicon glyphicon-stats"></span>Timeline</a></li>
+        <li><a href="/<%= locals.current_user.name || locals.user.name %>/photowall"><span class="glyphicon glyphicon-camera"></span>Photos</a></li>
+        <li><a href="/settings"><span class="glyphicon glyphicon-wrench"></span>Settings</a></li>
+        <li><a href="/signout"><span class="glyphicon glyphicon-log-out"></span>Log out</a></li>
+        <li><a href="/about"><span class="glyphicon glyphicon-info-sign"></span>About</a></li>
+    </ul>
+</nav>
+<% } else { %>
+<nav class="st-menu st-effect-1" id="menu-1">
+    <h2><em>Smile Everyday</em></h2>
+    <ul>
+        <li><a href="/"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+        <li><a href="/signup"><span class="glyphicon glyphicon-pencil"></span>Sign up</a></li>
+        <li><a href="/signin"><span class="glyphicon glyphicon-log-in"></span>Sign in</a></li>
+        <li><a href="/about"><span class="glyphicon glyphicon-info-sign"></span>About</a></li>
+    </ul>
+</nav>
+<% } %>

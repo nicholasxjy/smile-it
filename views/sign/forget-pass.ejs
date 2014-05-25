@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../meta.ejs %>
+    <link rel="stylesheet" href="css/assets/site.min.css"/>
+    <link rel="stylesheet" href="css/assets/sign.css"/>
+    <link rel="stylesheet" href="css/assets/header.css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/animatecss/3.1.0/animate.css">
+</head>
+<body class="signin-body" data-anijs="if:load, on: window, do: rotateIn animated, after: removeAnim, to: section">
+<div class="blur-wrap"></div>
+<% include ../common/header.ejs %>
+<section class="forget-pass-form">
+      <div class="form-title">
+          <h4>登录</h4>
+      </div>
+      <form  role="form" action="/forgot-password" method="post">
+          <% if (locals.error) { %>
+          <div class="form-group">
+              <div class="alert alert-warning">
+                  <strong><%= locals.error %></strong>
+              </div>
+          </div>
+          <% } %>
+          <div class="form-group">
+              <label for="email" class="control-label">邮箱</label>
+              <input type="email" class="form-control" name="email" data-anijs="if:focus, do:flash animated, after: removeAnim, to:.forget-pass-form" placeholder="请输入注册时所用的邮箱">
+          </div>
+          <div class="form-group">
+              <button type="submit" class="btn btn-info">确定</button>
+        </div>
+    </form>
+</section>
+<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="js/utils/site.min.js"></script>
+<script src="js/utils/anijs-min.js"></script>
+</body>
+</html>

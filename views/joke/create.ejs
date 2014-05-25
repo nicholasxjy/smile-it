@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../meta.ejs %>
+    <link rel="stylesheet" href="../css/assets/site.min.css"/>
+    <link rel="stylesheet" href="../css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../css/assets/header.css"/>
+    <link rel="stylesheet" href="../css/assets/joke.css"/>
+    <link rel="stylesheet" href="../build/imgly.css"/>
+</head>
+<body>
+    <% include ../common/header.ejs %>
+    <section class="create-section">
+        <div class="container">
+            <div class="row share-field">
+                <form action="" method="post" enctype="multipart/form-data">
+                    <div class="col-md-6 col-xs-12">
+                        <img src="<%= locals.current_user.profile_image_url %>" alt="100*100"
+                             class="img-responsive img-circle" width="80" height="80"/>
+                        <input type="text" required class="form-control share-title" placeholder="添加标题(必填)..." name="title"/>
+                        <textarea name="content" rows="10" class="form-control share-content" placeholder="添加所属心情(可选)..."></textarea>
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        <div class="upload">
+                            <input type="file" id="file"/>
+                        </div>
+                        <div class="alert alert-info">
+                            <strong>点击添加图片，编辑属于自己的个性美图</strong>
+                        </div>
+                        <div id="container"></div>
+                        <button class="btn btn-info" id="renderButton">查看效果</button>
+                        <div id="image-render-field">
+                        </div>
+                    </div>
+                    <button id="post-form" class="btn btn-info btn-lg">确定发表</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <script src="../js/utils/site.min.js"></script>
+    <script src="../build/imgly.concat.js"></script>
+    <script>
+        /**
+         * imglyKit
+         * integration example
+         *
+         * Copyright (c) 2013 img.ly
+         */
+
+        $(function () {
+            var fileInput = document.getElementById("file")
+                    , renderButton = $("#renderButton")
+                    , imgly = new imglyKit({
+                        container: "#container"
+                    });
+
+            // As soon as the user selects a file...
+            fileInput.addEventListener("change", function (event) {
+                var file;
+
+                // Find the selected file
+                if(event.target.files) {
+                    file = event.target.files[0];
+                } else {
+                    file = event.target.value;
+                }
+
+                // Use FileReader to turn the selected
+                // file into a data url. imglyKit needs
+                // a data url or an image
+                var reader = new FileReader();
+                reader.onload = (function(file) {
+                    return function (e) {
+                        data = e.target.result;
+
+                        // Run imglyKit with the selected file
+                        try {
+                            imgly.run(data);
+                        } catch (e) {
+                            if(e.name == "NoSupportError") {
+                                alert("Your browser does not support canvas.");
+                            } else if(e.name == "InvalidError") {
+                                alert("The given file is not an image");
+                            }
+                        }
+                    };
+                })(file);
+                reader.readAsDataURL(file);
+            });
+
+            // As soon as the user clicks the render button...
+            // Listen for "Render final image" click
+            renderButton.click(function (event) {
+                var dataUrl;
+                event.preventDefault();
+                // dataUrl = imgly.renderToDataURL("png", function (err, dataUrl) {});
+                // `dataUrl` now contains the full-sized rendered image
+                // Caution: This string will probably exceed the maximum
+                // dataURL size of 2M. You will not be able to set location.href
+                // or an <img> tag's `src` attribute to this dataUrl.
+
+                // dataUrl = imgly.renderToDataURL("png", { maxSize: "100x100" }, function (err, dataUrl) {});
+                // `dataUrl` now contains a resized rendered image that
+                // does not exceed 100x100 while keeping the ratio
+
+                // dataUrl = imgly.renderToDataURL("png", { size: "100x100" }, function (err, dataUrl) {});
+                // `dataUrl` now contains a resized rendered image with
+                // a size of 100x100 pixels while _not_ keeping the ratio
+
+                imgly.renderToDataURL("png", { size: "300x" }, function (err, dataUrl) {
+                    // `dataUrl` now contains a resized rendered image with
+                    // a width of 300 pixels while keeping the ratio
+
+                    $("<img>").attr({
+                        src: dataUrl
+                    }).appendTo($("#image-render-field"));
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+           $('#post-form').click(function(e) {
+               e.preventDefault();
+               e.stopPropagation();
+               var container = document.getElementById('container');
+               var title = $('.share-title').val();
+               var content = $('.share-content').val() || '';
+               var canvas = container.getElementsByTagName('canvas')[0];
+               var file;
+               if (canvas) {
+                   file = canvas.toDataURL();
+               }
+               $.ajax({
+                   url: '/joke/create',
+                   type: 'POST',
+                   dataType: 'json',
+                   data: {
+                       'title': title,
+                       'content': content,
+                       'file': file
+                   }
+               }).done(function(data) {
+                   if (data.status === 'success') {
+                       window.location.href = '<%= locals.config.host %>';
+                   } else {
+                       alert('oops, something problem here.');
+                   }
+               }).fail(function(data) {
+                   alert('oops, something wrong.')
+               });
+           });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../meta.ejs %>
+    <link rel="stylesheet" href="css/assets/site.min.css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="css/assets/siderbar.css"/>
+    <link rel="stylesheet" href="css/assets/settings.css"/>
+    <link rel="stylesheet" href="../build/imgly.css"/>
+</head>
+<body>
+<div class="st-container" id="st-container">
+    <% include ../common/siderbar.ejs %>
+    <button id="showsidebar" class="site-nav-logo">
+        <span class="icons icons-logo-m"></span>
+    </button>
+    <div class="st-pusher">
+        <div class="header">
+            <div class="site-img">
+                <a href="/">
+                    <img src="<%= locals.user.profile_image_url %>" alt="Logo" class="img-responsive img-circle"
+                         width="120" height="120"
+                         tiltle="<%= locals.user.name %>"/>
+                </a>
+            </div>
+        </div>
+        <div class="main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 intro-info">
+                        <h1>
+                            <a href="/<%= locals.user.name %>/timeline"><%= locals.user.name %></a>
+                        </h1>
+                        <% if (locals.user.profile) { %>
+                        <p><%= locals.user.profile %></p>
+                        <% } else { %>
+                        <p>Programmer & artist. Creator of the Luna programming language, Koa, Express, Stylus, Cluster, Mocha, Jade, node-canvas, component and many others.</p>
+                        <% } %>
+                        <a href="/joke/create" class="myButton" style="background-color: #ffffff;color:#18ab29;">Post now</a>
+                    </div>
+                </div>
+                <div class="row settings-field">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <label for="name">用户名</label>
+                                <input type="text" class="form-control" id="name" name="name" readonly value="<%= locals.user.name %>">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">邮箱</label>
+                                <input type="email" class="form-control" id="email" name="email" readonly value="<%= locals.user.email %>">
+                            </div>
+                            <div class="form-group">
+                                <label for="location">所在地点</label>
+                                <% if (locals.user.location) { %>
+                                <input type="text" class="form-control" id="location" name="location" value="<%= locals.user.location %>">
+                                <% } else { %>
+                                <input type="text" class="form-control" id="location" name="location" value="">
+                                <% } %>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile">个人简介</label>
+                                <% if (locals.user.profile) { %>
+                                <textarea name="profile" id="profile" class="form-control" rows="5"><%= locals.user.profile %></textarea>
+                                <% } else { %>
+                                <textarea name="profile" id="profile" class="form-control" rows="5"
+                                          placeholder="添加自己介绍..."></textarea>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-12">
+                            <div class="upload">
+                                <input type="file" id="file"/>
+                            </div>
+                            <div class="alert alert-info">
+                                <strong>点击添加处理头像，为了更好的显示，请剪切成正方形。</strong>
+                            </div>
+                            <div id="container"></div>
+                            <button class="btn btn-success" id="renderButton">查看效果图</button>
+                            <div id="image-render-field">
+                            </div>
+                        </div>
+                        <button id="post-settings" class="btn btn-success btn-lg">确定修改</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- load js here -->
+<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="js/utils/site.min.js"></script>
+<script src="../build/imgly.concat.js"></script>
+<script>
+    $('#showsidebar').click(function(e) {
+        e.stopPropagation();
+        $('#st-container').addClass('st-effect-1 st-menu-open');
+        $(this).hide('slow');
+        $('body').addClass('show-sidebar-no-scroll');
+    });
+    $('.st-pusher').click(function() {
+        $('#st-container').removeClass('st-menu-open');
+        $('#showsidebar').show('slow');
+        $('body').removeClass('show-sidebar-no-scroll');
+    });
+</script>
+<script>
+    /**
+     * imglyKit
+     * integration example
+     *
+     * Copyright (c) 2013 img.ly
+     */
+
+    $(function () {
+        var fileInput = document.getElementById("file")
+                , renderButton = $("#renderButton")
+                , imgly = new imglyKit({
+                    container: "#container"
+                });
+
+        // As soon as the user selects a file...
+        fileInput.addEventListener("change", function (event) {
+            var file;
+
+            // Find the selected file
+            if(event.target.files) {
+                file = event.target.files[0];
+            } else {
+                file = event.target.value;
+            }
+
+            // Use FileReader to turn the selected
+            // file into a data url. imglyKit needs
+            // a data url or an image
+            var reader = new FileReader();
+            reader.onload = (function(file) {
+                return function (e) {
+                    data = e.target.result;
+
+                    // Run imglyKit with the selected file
+                    try {
+                        imgly.run(data);
+                    } catch (e) {
+                        if(e.name == "NoSupportError") {
+                            alert("Your browser does not support canvas.");
+                        } else if(e.name == "InvalidError") {
+                            alert("The given file is not an image");
+                        }
+                    }
+                };
+            })(file);
+            reader.readAsDataURL(file);
+        });
+
+        // As soon as the user clicks the render button...
+        // Listen for "Render final image" click
+        renderButton.click(function (event) {
+            var dataUrl;
+            event.preventDefault();
+            // dataUrl = imgly.renderToDataURL("png", function (err, dataUrl) {});
+            // `dataUrl` now contains the full-sized rendered image
+            // Caution: This string will probably exceed the maximum
+            // dataURL size of 2M. You will not be able to set location.href
+            // or an <img> tag's `src` attribute to this dataUrl.
+
+            // dataUrl = imgly.renderToDataURL("png", { maxSize: "100x100" }, function (err, dataUrl) {});
+            // `dataUrl` now contains a resized rendered image that
+            // does not exceed 100x100 while keeping the ratio
+
+            // dataUrl = imgly.renderToDataURL("png", { size: "100x100" }, function (err, dataUrl) {});
+            // `dataUrl` now contains a resized rendered image with
+            // a size of 100x100 pixels while _not_ keeping the ratio
+
+            imgly.renderToDataURL("png", { size: "300x" }, function (err, dataUrl) {
+                // `dataUrl` now contains a resized rendered image with
+                // a width of 300 pixels while keeping the ratio
+
+                $("<img>").attr({
+                    src: dataUrl
+                }).appendTo($("#image-render-field"));
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#post-settings').click(function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var container = document.getElementById('container');
+            var name = $('#name').val();
+            var email = $('#email').val();
+            var location = $('#location').val() || '';
+            var profile = $('#profile').val() || '';
+            var canvas = container.getElementsByTagName('canvas')[0];
+            var file;
+            if (canvas) {
+                file = canvas.toDataURL();
+            }
+            $.ajax({
+                url: '/settings',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    'name': name,
+                    'email': email,
+                    'file': file,
+                    'location': location,
+                    'profile': profile,
+                    'gender': '0'
+                }
+            }).done(function(data) {
+                if (data.status === 'success') {
+                    window.location.href = '<%= locals.config.host %>';
+                } else {
+                    alert('oops, something problem here.');
+                }
+            }).fail(function(data) {
+                alert('oops, something wrong.')
+            });
+        });
+    });
+</script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,97 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
+            <span class="icon icon-radio-checked">Toggle navigation</span>
+        </button>
+        <a class="navbar-brand" href="#">Smile It</a>
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse-01">
+        <ul class="nav navbar-nav">
+            <li class="active">
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/about">About</a>
+            </li>
+        </ul>
+        <form class="navbar-form navbar-left" action="#" role="search">
+            <div class="form-group">
+                <div class="input-group input-group-rounded">
+                    <span class="input-group-btn">
+                     <button type="submit" class="btn">
+                         <span class="fui-search"></span>
+                     </button>
+                    </span>
+                    <input class="form-control" id="navbarInput-01" type="search" placeholder="Search friends or ...">
+                </div>
+            </div>
+        </form>
+        <ul class="nav navbar-nav navbar-right" style="margin-right: 30px;">
+            <% if (locals.current_user && locals.current_user.message_not_read > 0) { %>
+                <li>
+                    <a href="/u/messages">
+                        <span class="fui-mail"></span>
+                        <span class="badge" style="color:#ffffff;background-color: #d2322d;position: relative;bottom: 6px;left:-6px;"><%= locals.current_user.message_not_read %></span>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="fui-user"></span>
+                        <span class="caret" style="border-top-color: #ffffff;border-bottom-color: #ffffff;"></span>
+                    </a>
+                    <span class="dropdown-arrow dropdown-arrow-inverse"></span>
+                    <ul class="dropdown-menu dropdown-inverse">
+                        <li>
+                            <a href="/joke/create">
+                                <span class="icon icon-pencil"></span>
+                                &nbsp;&nbsp;Share something
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/<%= locals.current_user.name %>/timeline">
+                                <span class="fui-user"></span>
+                                &nbsp;&nbsp;Timeline
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/<%= locals.current_user.name %>/photos">
+                                <span class="fui-photo"></span>
+                                &nbsp;&nbsp;Photos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/settings">
+                                <span class="fui-gear"></span>
+                                &nbsp;&nbsp;Settings
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/signout">
+                                <span class="icon icon-sign-out"></span>
+                                &nbsp;&nbsp;Sign Out
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            <% } else { %>
+                <li>
+                    <a href="/signup">
+                        <span class="icon icon-signup"></span>
+                        &nbsp;&nbsp;Sign Up
+                    </a>
+                </li>
+                <li>
+                    <a href="/signin">
+                        <span class="icon icon-sign-in"></span>
+                        &nbsp;&nbsp;Sign In
+                    </a>
+                </li>
+            <% } %>
+        </ul>
+    </div><!-- /.navbar-collapse -->
+</nav><!-- /navbar -->
+
+
+
+</body>
+</html>

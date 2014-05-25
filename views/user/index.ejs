@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% include ../meta.ejs %>
+    <link rel="stylesheet" href="../css/assets/site.min.css"/>
+    <link rel="stylesheet" href="../css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../css/assets/siderbar.css"/>
+    <link rel="stylesheet" href="../css/assets/user.css"/>
+</head>
+<body style="background: url(<%= locals.config.host %>/images/low_contrast_linen.png) repeat 0 0;">
+<div class="st-container" id="st-container">
+    <% include ../common/siderbar.ejs %>
+    <button id="showsidebar" class="site-nav-logo">
+        <span class="icons icons-logo-m"></span>
+    </button>
+    <div class="st-pusher">
+        <div class="header">
+            <div class="site-img">
+                <a href="/">
+                    <img src="<%= locals.user.profile_image_url %>" alt="Logo" class="img-responsive img-circle"
+                         width="120" height="120"
+                         tiltle="<%= locals.user.name %>"/>
+                </a>
+            </div>
+        </div>
+        <div class="main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 intro-info">
+                        <h1>
+                            <a href="/<%= locals.user.name %>/timeline"><%= locals.user.name %></a>
+                        </h1>
+                        <% if (locals.user.profile) { %>
+                        <p style="color: #ffffff;font-size: 14px;"><%= locals.user.profile %></p>
+                        <% } else { %>
+                        <p style="color: #ffffff;font-size: 14px;">Programmer & artist. Creator of the Luna programming language, Koa, Express, Stylus, Cluster, Mocha, Jade, node-canvas, component and many others.</p>
+                        <% } %>
+                        <% if (locals.current_user._id.toString() === locals.user._id.toString()) { %>
+                        <a href="/joke/create" class="myButton" style="background-color: #ffffff;color:#18ab29;">Post now</a>
+                        <% } else if (locals.relation) { %>
+                            <a id="btn-follow" data="<%= locals.user._id %>" action="un-follow" class="myButton" style="background-color: #d2322d;color:#ffffff;">Unfollow</a>
+                        <% } else { %>
+                            <a id="btn-follow" data="<%= locals.user._id %>" action="add-follow" class="myButton" style="background-color: #ffffff;color:#18ab29;">Follow</a>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+            <div class="user-timeline">
+                <div id="my-timeline"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- load js here -->
+<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script src="../js/utils/site.min.js"></script>
+<script src="../js/storyjs-embed.js"></script>
+<script>
+    $(document).ready(function() {
+        //timeline
+        createStoryJS({
+            type: 'timeline',
+            debug: false,
+            source: '<%= locals.config.host %>/userprofile/json/<%= locals.user.name %>.json',
+            width: '100%',
+            height: '600',
+            hash_bookmark: true,
+            lang: 'zh-cn',
+            start_zoom_adjust:  '2',
+            start_at_end: false,
+            font: 'NewsCycle-Merriweather',
+            embed_id: 'my-timeline'
+        });
+    });
+</script>
+<script src="/js/storyjs-embed-generator.js"></script>
+<script>
+$(document).ready(function() {
+    $('#showsidebar').click(function(e) {
+        e.stopPropagation();
+        $('#st-container').addClass('st-effect-1 st-menu-open');
+        $(this).hide('slow');
+        $('body').addClass('show-sidebar-no-scroll');
+    });
+    $('.st-pusher').click(function() {
+        $('#st-container').removeClass('st-menu-open');
+        $('#showsidebar').show('slow');
+        $('body').removeClass('show-sidebar-no-scroll');
+    });
+
+    $('#btn-follow').click(function() {
+        var userid = $(this).attr('data');
+        var action = $(this).attr('action');
+        $.ajax({
+            url: '/user/follow',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                'userid': userid,
+                'action': action
+            }
+        }).done(function(data) {
+            if (data.status === 'success') {
+                var $btn = $('#btn-follow');
+                if (action === 'add-follow') {
+                    $btn.attr('action', 'un-follow');
+                    $btn.css({'color': '#ffffff', 'background-color': '#d2322d'}).html('Unfollow');
+                } else {
+                    $btn.attr('action', 'add-follow');
+                    $btn.css({'color': '#18ab29', 'background-color': '#ffffff'}).html('Follow');
+                }
+            } else {
+                alert('oops, something wrong.');
+            }
+        }).fail(function() {
+            alert('oops, something wrong.')
+        });
+    });
+});
+</script>
+</body>
+</html>
+
+
+
+
