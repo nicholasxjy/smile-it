@@ -29,15 +29,15 @@
         </div>
         <div class="item-footer">
             <ul class="list-inline">
-                <li><a href="/joke/<%= joke._id %>" class="btn btn-sm btn-primary btn-comment">Comment</a></li>
+                <li><a href="/joke/<%= joke._id %>" class="btn btn-sm btn-default btn-comment">Comment</a></li>
                 <li class="like-list" data="<%= joke._id %>">
                     <% if (joke.has_plus_one) { %>
-                        <a  class="btn btn-sm btn-primary" style="background-color: #d2322d;color: #ffffff;cursor: default;">+<%= joke.like_count %></a>
+                        <a  class="btn btn-sm btn-default" style="background-color: #d2322d;color: #ffffff;cursor: default;">+<%= joke.like_count %></a>
                     <% } else { %>
-                        <a  id="<%= joke._id %>" class="btn btn-sm btn-primary btn-plus-like">+<%= joke.like_count %></a>
+                        <a  id="<%= joke._id %>" class="btn btn-sm btn-default btn-plus-like">+<%= joke.like_count %></a>
                     <% } %>
                 </li>
-                <li><a href="/joke/<%= joke._id %>" class="btn btn-sm btn-primary btn-share">Share</a></li>
+                <li><a href="/joke/<%= joke._id %>" class="btn btn-sm btn-default btn-share">Share</a></li>
             </ul>
         </div>
     </div>
