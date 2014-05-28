@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="main">
-            <div class="container">
+            <div class="container user-timeline">
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3 intro-info">
                         <h1>
@@ -45,8 +45,32 @@
                     </div>
                 </div>
             </div>
-            <div class="user-timeline">
-                <div id="my-timeline"></div>
+            <div class="container">
+                <ul class="timeline">
+                    <% if (locals.recent_jokes && locals.recent_jokes.length > 0) { %>
+                    <% locals.recent_jokes.forEach(function(joke) { %>
+                    <li class="item">
+                        <div class="time">
+                            <span><%= joke.obj_create_time.Day %>/<%= joke.obj_create_time.Month %>/<%= joke.obj_create_time.Year %></span>
+                            <span><%= joke.obj_create_time.Hour %>:<%= joke.obj_create_time.Minutes %></span>
+                        </div>
+                        <div class="middle"></div>
+                        <div class="content">
+                            <h2><%= joke.title %></h2>
+                            <p>
+                            <% if (joke.content) { %>
+                            <%= joke.content %>
+                            <% } %>
+                            </p>
+                            <% if (joke.pictures && joke.pictures.length > 0) { %>
+                            <img src="<%= joke.pictures[0] %>" alt="share photos"
+                            class="img-responsive">
+                            <% } %>
+                        </div>
+                    </li>
+                    <% }); %>
+                    <% } %>
+                </ul>
             </div>
         </div>
     </div>
@@ -54,40 +78,8 @@
 <!-- load js here -->
 <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
 <script src="../js/utils/site.min.js"></script>
-<script src="../js/storyjs-embed.js"></script>
-<script>
-    $(document).ready(function() {
-        //timeline
-        createStoryJS({
-            type: 'timeline',
-            debug: false,
-            source: '<%= locals.config.host %>/userprofile/json/<%= locals.user.name %>.json',
-            width: '100%',
-            height: '600',
-            hash_bookmark: true,
-            lang: 'zh-cn',
-            start_zoom_adjust:  '2',
-            start_at_end: false,
-            font: 'NewsCycle-Merriweather',
-            embed_id: 'my-timeline'
-        });
-    });
-</script>
-<script src="/js/storyjs-embed-generator.js"></script>
 <script>
 $(document).ready(function() {
-    $('#showsidebar').click(function(e) {
-        e.stopPropagation();
-        $('#st-container').addClass('st-effect-1 st-menu-open');
-        $(this).hide('slow');
-        $('body').addClass('show-sidebar-no-scroll');
-    });
-    $('.st-pusher').click(function() {
-        $('#st-container').removeClass('st-menu-open');
-        $('#showsidebar').show('slow');
-        $('body').removeClass('show-sidebar-no-scroll');
-    });
-
     $('#btn-follow').click(function() {
         var userid = $(this).attr('data');
         var action = $(this).attr('action');

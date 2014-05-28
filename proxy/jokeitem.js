@@ -66,6 +66,7 @@ exports.getJokesByQuery = function(query, opts, callback) {
                     joke.author = author;
                     joke.comments = comments;
                     joke.friendly_create_time = Util.formatDate(joke.create_at, true);
+                    joke.obj_create_time = Util.formatDate(joke.create_at, false);
                 }
                 return joke;
             }));
