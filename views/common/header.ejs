@@ -19,13 +19,13 @@
             <% if (locals.current_user && locals.current_user.message_not_read > 0) { %>
                 <li>
                     <a href="/u/messages">
-                        <span class="icon icon-envolope"></span>
+                        <span class="icon icon-mail"></span>
                         <span class="badge" style="color:#ffffff;background-color: #d2322d;position: relative;bottom: 6px;left:-6px;"><%= locals.current_user.message_not_read %></span>
                     </a>
                 </li>
                 <li class="dropdown">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="fui-user"></span>
+                        <span class="icon icon-user"></span>
                         <span class="caret" style="border-top-color: #ffffff;border-bottom-color: #ffffff;"></span>
                     </a>
                     <span class="dropdown-arrow dropdown-arrow-inverse"></span>
@@ -38,19 +38,19 @@
                         </li>
                         <li>
                             <a href="/<%= locals.current_user.name %>/timeline">
-                                <span class="fui-user"></span>
+                                <span class="icon icon-user"></span>
                                 &nbsp;&nbsp;Timeline
                             </a>
                         </li>
                         <li>
                             <a href="/<%= locals.current_user.name %>/photos">
-                                <span class="fui-photo"></span>
+                                <span class="icon icon-camera"></span>
                                 &nbsp;&nbsp;Photos
                             </a>
                         </li>
                         <li>
                             <a href="/settings">
-                                <span class="fui-gear"></span>
+                                <span class="icon icon-gear"></span>
                                 &nbsp;&nbsp;Settings
                             </a>
                         </li>
