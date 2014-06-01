@@ -1,81 +1,79 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
-            <span class="icon icon-radio-checked"></span>
+        <a class="navbar-brand" href="#">Smile it</a>
+         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Smile It</a>
     </div>
-    <div class="collapse navbar-collapse" id="navbar-collapse-01">
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
             <li class="active">
                 <a href="/">Home</a>
             </li>
             <li>
-                <a href="/about">About</a>
+                <a href="/timeline">Timeline</a>
+            </li>
+            <li>
+                <a href="/photos">Photos</a>
             </li>
         </ul>
-
-        <ul class="nav navbar-nav navbar-right">
-            <% if (locals.current_user && locals.current_user.message_not_read > 0) { %>
-                <li>
-                    <a href="/u/messages">
-                        <span class="icon icon-mail"></span>
-                        <span class="badge" style="color:#ffffff;background-color: #d2322d;position: relative;bottom: 6px;left:-6px;"><%= locals.current_user.message_not_read %></span>
-                    </a>
-                </li>
+        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="search friends or ..." />
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+        <% if (locals.current_user) { %>
+            <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="icon icon-user"></span>
-                        <span class="caret" style="border-top-color: #ffffff;border-bottom-color: #ffffff;"></span>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-right:40px;">
+                        <i class="icon icon-user"></i>  <%= locals.current_user.name %>
+                        <strong class="caret"></strong>
                     </a>
-                    <span class="dropdown-arrow dropdown-arrow-inverse"></span>
-                    <ul class="dropdown-menu dropdown-inverse">
+                    <ul class="dropdown-menu">
                         <li>
                             <a href="/joke/create">
-                                <span class="icon icon-pencil"></span>
-                                &nbsp;&nbsp;Share something
+                                <i class="icon icon-pencil"></i>
+                                share it
                             </a>
                         </li>
                         <li>
                             <a href="/<%= locals.current_user.name %>/timeline">
-                                <span class="icon icon-user"></span>
-                                &nbsp;&nbsp;Timeline
+                                <i class="icon icon-user"></i> my timeline
                             </a>
                         </li>
                         <li>
                             <a href="/<%= locals.current_user.name %>/photos">
-                                <span class="icon icon-camera"></span>
-                                &nbsp;&nbsp;Photos
+                                <i class="icon icon-camera"></i> my gallery
                             </a>
                         </li>
                         <li>
                             <a href="/settings">
-                                <span class="icon icon-gear"></span>
-                                &nbsp;&nbsp;Settings
+                                <i class="icon icon-gear"></i> Edit Profile
                             </a>
+                        </li>
+                        <li class="divider">
                         </li>
                         <li>
                             <a href="/signout">
-                                <span class="icon icon-sign-out"></span>
-                                &nbsp;&nbsp;Sign Out
+                                <i class="icon icon-sign-out"></i> sign out
                             </a>
                         </li>
                     </ul>
                 </li>
-            <% } else { %>
+            </ul>
+        <% } else { %>
+            <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="/signup">
-                        <span class="icon icon-signup"></span>
-                        &nbsp;&nbsp;Sign Up
+                    <a href="/signin" style="padding-right:40px;">
+                        <i class="icon icon-sign-in"></i> sign up/login
                     </a>
                 </li>
-                <li>
-                    <a href="/signin">
-                        <span class="icon icon-sign-in"></span>
-                        &nbsp;&nbsp;Sign In
-                    </a>
-                </li>
-            <% } %>
-        </ul>
+            </ul>
+        <% } %>
     </div>
 </nav>

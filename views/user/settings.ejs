@@ -2,108 +2,40 @@
 <html>
 <head>
     <% include ../meta.ejs %>
-    <link rel="stylesheet" href="css/assets/site.min.css"/>
-    <link rel="stylesheet" href="css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="css/assets/siderbar.css"/>
-    <link rel="stylesheet" href="css/assets/settings.css"/>
+    <link rel="stylesheet" href="../../css/assets/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../../css/icomoon.css">
+    <link rel="stylesheet" href="../../css/assets/settings.css"/>
     <link rel="stylesheet" href="../build/imgly.css"/>
 </head>
-<body>
-<div class="st-container" id="st-container">
-    <% include ../common/siderbar.ejs %>
-    <button id="showsidebar" class="site-nav-logo">
-        <span class="icons icons-logo-m"></span>
-    </button>
-    <div class="st-pusher">
-        <div class="header">
-            <div class="site-img">
-                <a href="/">
-                    <img src="<%= locals.user.profile_image_url %>" alt="Logo" class="img-responsive img-circle"
-                         width="120" height="120"
-                         tiltle="<%= locals.user.name %>"/>
-                </a>
-            </div>
-        </div>
-        <div class="main">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3 intro-info">
-                        <h1>
-                            <a href="/<%= locals.user.name %>/timeline"><%= locals.user.name %></a>
-                        </h1>
-                        <% if (locals.user.profile) { %>
-                        <p><%= locals.user.profile %></p>
-                        <% } else { %>
-                        <p>Programmer & artist. Creator of the Luna programming language, Koa, Express, Stylus, Cluster, Mocha, Jade, node-canvas, component and many others.</p>
-                        <% } %>
-                        <a href="/joke/create" class="myButton" style="background-color: #ffffff;color:#18ab29;">Post now</a>
+<body style="background-color: #e0e0e0;">
+    <% include ../common/header.ejs %>
+    <div class="setting-main">
+        <div class="container setting-main-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="setting-title">
+                        <h1><i class="icon icon-gear"></i>设置</h1>
                     </div>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="/settings">个人资料</a>
+                        </li>
+                        <li>
+                            <a href="/setavatar">设置头像</a>
+                        </li>
+                        <li>
+                            <a href="/setpass">重置密码</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="row settings-field">
-                    <form action="" method="post" enctype="multipart/form-data">
-                        <div class="col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <label for="name">用户名</label>
-                                <input type="text" class="form-control" id="name" name="name" readonly value="<%= locals.user.name %>">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">邮箱</label>
-                                <input type="email" class="form-control" id="email" name="email" readonly value="<%= locals.user.email %>">
-                            </div>
-                            <div class="form-group">
-                                <label for="location">所在地点</label>
-                                <% if (locals.user.location) { %>
-                                <input type="text" class="form-control" id="location" name="location" value="<%= locals.user.location %>">
-                                <% } else { %>
-                                <input type="text" class="form-control" id="location" name="location" value="">
-                                <% } %>
-                            </div>
-                            <div class="form-group">
-                                <label for="profile">个人简介</label>
-                                <% if (locals.user.profile) { %>
-                                <textarea name="profile" id="profile" class="form-control" rows="5"><%= locals.user.profile %></textarea>
-                                <% } else { %>
-                                <textarea name="profile" id="profile" class="form-control" rows="5"
-                                          placeholder="添加自己介绍..."></textarea>
-                                <% } %>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xs-12">
-                            <div class="upload">
-                                <input type="file" id="file"/>
-                            </div>
-                            <div class="alert alert-info">
-                                <strong>点击添加处理头像，为了更好的显示，请剪切成正方形。</strong>
-                            </div>
-                            <div id="container"></div>
-                            <button class="btn btn-success" id="renderButton">查看效果图</button>
-                            <div id="image-render-field">
-                            </div>
-                        </div>
-                        <button id="post-settings" class="btn btn-success btn-lg">确定修改</button>
-                    </form>
-                </div>
+                <div class="col-md-8"></div>
             </div>
         </div>
     </div>
-</div>
 <!-- load js here -->
-<script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-<script src="js/utils/site.min.js"></script>
+<script src="js/utils/jquery-2.1-min.js"></script>
+<script src="js/utils/bootstrap.min.js"></script>
 <script src="../build/imgly.concat.js"></script>
-<script>
-    $('#showsidebar').click(function(e) {
-        e.stopPropagation();
-        $('#st-container').addClass('st-effect-1 st-menu-open');
-        $(this).hide('slow');
-        $('body').addClass('show-sidebar-no-scroll');
-    });
-    $('.st-pusher').click(function() {
-        $('#st-container').removeClass('st-menu-open');
-        $('#showsidebar').show('slow');
-        $('body').removeClass('show-sidebar-no-scroll');
-    });
-</script>
 <script>
     /**
      * imglyKit

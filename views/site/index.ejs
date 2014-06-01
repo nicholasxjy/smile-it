@@ -2,31 +2,25 @@
 <html>
     <head>
         <% include ../meta.ejs %>
-        <link rel="stylesheet" href="css/assets/site.min.css">
+        <link rel="stylesheet" href="css/assets/bootstrap.min.css">
         <link rel="stylesheet" href="css/icomoon.css"/>
-        <link rel="stylesheet" href="css/demo.css"/>
         <link rel="stylesheet" href="css/assets/index.css"/>
         <link rel="stylesheet" href="css/fancybox/jquery.fancybox.css"/>
     </head>
     <body>
-        <div class="st-container" id="st-container">
-            <% include ../common/header.ejs %>
-            <div class="st-pusher">
-                <div class="main">
-                    <div id="container">
-                        <div id="contents" class="transitions-enabled infinite-scroll">
-                            <% include ../common/jokeitem.ejs %>
-                        </div>
-                        <nav id="page-nav">
-                            <a href="/?page=2"></a>
-                        </nav>
-                    </div>
-                </div>
+        <% include ../common/header.ejs %>
+        <% include ../common/jumbotron.ejs %>
+        <div id="container">
+            <div id="contents" class="transitions-enabled infinite-scroll">
+                <% include ../common/jokeitem.ejs %>
             </div>
+            <nav id="page-nav">
+                <a href="/?page=2"></a>
+            </nav>
         </div>
     <!-- load js here -->
         <script src="js/utils/jquery-2.1-min.js"></script>
-        <script src="js/utils/site.min.js"></script>
+        <script src="js/utils/bootstrap.min.js"></script>
         <script src="js/utils/jquery.infinitescroll.min.js"></script>
         <script src="js/utils/jquery.fancybox.pack.js"></script>
         <script src="js/utils/masonry.min.js"></script>
