@@ -1,0 +1,50 @@
+<div class="sidebar">
+    <div class="sidebar-top">
+        <img src="<%= locals.current_user.profile_image_url %>" alt="profile image"
+                class="img-circle img-responsive" width="100" height="100"/>
+        <h1 class="sidebar-user-name"><%= locals.current_user.name %></h1>
+        <p class="sidebar-user-profile">
+            <%= locals.current_user.profile %>
+        </p>
+        <% if (locals.current_user && locals.user
+                && locals.current_user._id.toString() !== locals.user._id.toString()) { %>
+            <button class="btn btn-success">Follow</button>
+        <% } %>
+    </div>
+    <div class="sidebar-middle">
+        <ul class="list-inline">
+            <li><img src="http://127.0.0.1:3000/upload_pics/pictures/1400482802948/nicholas/1400482802961_image.png"
+                     alt="items"
+                 width="100" height="100" class="img-responsive"/></li>
+            <li><img src="http://127.0.0.1:3000/upload_pics/pictures/1400482802948/nicholas/1400482802961_image.png"
+                     alt="items"
+                     width="100" height="100" class="img-responsive"/></li>
+            <li><img src="http://127.0.0.1:3000/upload_pics/pictures/1400482802948/nicholas/1400482802961_image.png"
+                     alt="items"
+                     width="100" height="100" class="img-responsive"/></li>
+            <li><img src="http://127.0.0.1:3000/upload_pics/pictures/1400482802948/nicholas/1400482802961_image.png"
+                     alt="items"
+                     width="100" height="100" class="img-responsive"/></li>
+            <li><img src="http://127.0.0.1:3000/upload_pics/pictures/1400482802948/nicholas/1400482802961_image.png"
+                     alt="items"
+                     width="100" height="100" class="img-responsive"/></li>
+            <li><img src="http://127.0.0.1:3000/upload_pics/pictures/1400482802948/nicholas/1400482802961_image.png"
+                     alt="items"
+                     width="100" height="100" class="img-responsive"/></li>
+        </ul>
+    </div>
+    <div class="sidebar-bottom">
+        <h1 class="sidebar-bottom-title">Activities</h1>
+        <ul class="list-unstyled">
+            <li>
+                <span class="icon icon-twitter"></span><a href="#">twitter</a>
+            </li>
+            <li>
+                <span class="icon icon-google-plus"></span><a href="#">google+</a>
+            </li>
+            <li>
+                <span class="icon icon-facebook"></span><a href="#">facebook</a>
+            </li>
+        </ul>
+    </div>
+</div>

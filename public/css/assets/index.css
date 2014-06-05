@@ -1,12 +1,12 @@
 body {
     background-color: #e0e0e0;
 }
+.main {
+    padding-top: 80px;
+}
 #container {
-    margin: 0 auto;
     max-width: 810px;
-    padding-right: 30px;
-    padding-left: 30px;
-
+    margin-left: 270px;
 }
 #contents {
     margin: 0 auto;
