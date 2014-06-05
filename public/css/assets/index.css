@@ -1,0 +1,114 @@
+body {
+    background-color: #e0e0e0;
+}
+#container {
+    margin: 0 auto;
+    max-width: 810px;
+    padding-right: 30px;
+    padding-left: 30px;
+
+}
+#contents {
+    margin: 0 auto;
+}
+.item {
+    background-color: #ffffff;
+    padding: 15px;
+    -webkit-border-radius: 2px;
+    border: 2px;
+    -moz-border-radius: 2px;
+    box-shadow: 0 2px 3px #cccccc;
+}
+.item-header {
+    height: 60px;
+    position: relative;
+}
+.user-gravatar {
+    padding-top: 5px;
+}
+.item-header-info {
+    position: absolute;
+    top:5px;
+    left:70px;
+}
+.item-header-info p {
+    margin: 0;
+}
+.item-create-time {
+    font-family: "PT Sans";
+    font-size: 12px;
+    color: rgba(0,0,0,0.3);
+    padding-top: 5px;
+}
+.item-user-name {
+    font-size: 14px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #000000;
+    font-weight: 500;
+}
+.item-user-name:hover {
+    color: #000000;
+    text-decoration: underline;
+}
+.item-content h6 {
+    font-size: 14px;
+    font-weight: 500;
+
+}
+.item-content-content {
+    font-size: 13px;
+    line-height: 1.4;
+    font-style: normal;
+}
+.item-viewdetail {
+    margin-top: 10px;
+}
+.item-footer {
+    margin-top: 15px;
+}
+.item-footer a {
+    font-family: "PT Sans";
+}
+@media screen and (min-width:810px) {
+    #contents {
+       width: 750px;
+    }
+    .item {
+        width: 360px;
+        float: left;
+        margin-bottom: 30px;
+    }
+}
+@media screen and (max-width:810px) {
+    #contents {
+        width: 520px;
+    }
+    .item {
+        width: 520px;
+        float: left;
+        margin-bottom: 30px;
+    }
+}
+
+/* Infinite Scroll loader */
+#infscr-loading {
+    text-align: center;
+    z-index: 100;
+    position: fixed;
+    left: 45%;
+    bottom: 40px;
+    width: 200px;
+    padding: 10px;
+    background: #000;
+    opacity: 0.8;
+    color: #FFF;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* sign in */
+.signup-body, .signin-body {
+    background: url(../../images/low_contrast_linen.png) repeat 0 0;
+}

@@ -1,6 +1,6 @@
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="navbar-header">
-        <a class="navbar-brand" href="#">Smile it</a>
+        <a class="navbar-brand" href="#"><span class="icon icon-happy nav-icon-circle"></span></a>
          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 
             <span class="icon-bar"></span>
@@ -11,36 +11,29 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-            <li class="active">
-                <a href="/">Home</a>
+            <li>
+                <a href="/"><span class="icon icon-home nav-icon-circle"></span></a>
             </li>
             <li>
-                <a href="/timeline">Timeline</a>
+                <a href="/timeline"><span class="icon icon-bar-chart-o nav-icon-circle"></span></a>
             </li>
+            <% if (locals.current_user) { %>
             <li>
-                <a href="/photos">Photos</a>
+                <a href="/messages"><span class="icon icon-envelope-o nav-icon-circle"></span></a>
+            </li>
+            <% } %>
+            <li>
+                <a href="/photos"><span class="icon icon-picture nav-icon-circle"></span></a>
             </li>
         </ul>
-        <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="search friends or ..." />
-            </div>
-            <button type="submit" class="btn btn-success">Submit</button>
-        </form>
         <% if (locals.current_user) { %>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right nav-ul-info">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-right:40px;">
-                        <i class="icon icon-user"></i>  <%= locals.current_user.name %>
-                        <strong class="caret"></strong>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="<%= locals.current_user.profile_image_url %>"
+                        class="img-circle img-responsive">
                     </a>
                     <ul class="dropdown-menu">
-                        <li>
-                            <a href="/joke/create">
-                                <i class="icon icon-pencil"></i>
-                                share it
-                            </a>
-                        </li>
                         <li>
                             <a href="/<%= locals.current_user.name %>/timeline">
                                 <i class="icon icon-user"></i> my timeline
@@ -69,11 +62,17 @@
         <% } else { %>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="/signin" style="padding-right:40px;">
-                        <i class="icon icon-sign-in"></i> sign up/login
+                    <a href="/signin">
+                        <span class="icon icon-sign-in nav-icon-circle"></span>
                     </a>
                 </li>
             </ul>
         <% } %>
+        <form class="navbar-form navbar-right nav-search-form" role="search">
+            <div class="form-group search-bar">
+                <input type="text" class="form-control search-input" placeholder="search friends or ..." />
+                <span class="icon icon-search search-bar-icon"></span>
+            </div>
+        </form>
     </div>
 </nav>

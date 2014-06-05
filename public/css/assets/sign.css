@@ -1,0 +1,68 @@
+html, body {
+    height: 100%;
+}
+.signin-body .blur-wrap {
+    background: url(../../images/img/sign/signin-bg.jpg) no-repeat center center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+.signup-body .blur-wrap {
+    background: url(../../images/img/sign/signup-bg.jpg) no-repeat center center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+.blur-wrap {
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+.register-form, .login-form ,.forget-pass-form, .reset-pass-form{
+    position: absolute;
+    right: 120px;
+    top: 80px;
+    font-family: "Lato";
+    font-weight: 400;
+    min-width: 380px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-shadow: 10px 10px 5px rgba(0,0,0,0.3);
+    z-index: 200;
+
+}
+.register-form form, .login-form form, .forget-pass-form form {
+    padding: 10px 15px 10px 15px;
+}
+.form-title {
+    padding-top:15px;
+    padding-left: 10px;
+    height: 52px;
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 6px 6px 0 0;
+}
+.form-title h4 {
+    margin:0;
+    padding: 0;
+}
+.link-signin, .link-forget {
+    font-family: "Lato";
+    font-size: 12px;
+    text-decoration: underline;
+    margin-left: 30px;
+    font-style: italic;
+    color: rgba(0,0,0,0.3);
+}
+.link-signin:hover, .link-forget:hover {
+    color: rgba(0,0,0,0.3);
+    text-decoration: underline;
+}

@@ -1,5 +1,6 @@
 node_modules
 middlewares
-public
+public/upload_pics
+public/userprofile
 .idea
 DS_Store

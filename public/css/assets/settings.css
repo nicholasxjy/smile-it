@@ -1,0 +1,31 @@
+.setting-main {
+    margin-top: 80px;
+}
+.setting-main-body {
+    background-color: #ffffff;
+}
+.setting-title {
+    margin:20px 0 10px 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+.setting-title h1 {
+    font-size: 18px;
+    font-style: normal;
+    line-height: 100%;
+    margin: 0 20px 0 20px;
+}
+.setting-left li {
+    height: 40px;
+    padding: 10px 0px 10px 50px;
+}
+.setting-left li a {
+    color: #333333;
+    display: block;
+}
+.setting-active {
+    background-color: #99a1a6;
+}
+.setting-right {
+    padding: 20px;
+    border-left: 1px solid #e0e0e0;
+}

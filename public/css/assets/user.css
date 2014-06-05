@@ -1,0 +1,105 @@
+.user-main-body {
+    width:1000px;
+    background-color: #ffffff;
+    margin:80px auto 0;
+}
+.user-main-body-r {
+    float: right;
+}
+.user-main-body-l {
+    width:760px;
+    padding: 10px 20px 40px 20px;
+    border-right: 1px solid rgba(0,0,0,0.3);
+}
+.user-main-body-r-content {
+    width: 240px;
+    padding: 0 20px 0 20px;
+    text-align: center;
+}
+.user-main-body-r-content h4 {
+    font-size: 30px;
+    margin-top: 25px;
+}
+.timeline {
+    position: relative;
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+.timeline li {
+    position: relative;
+}
+.time {
+    position: absolute;
+    width: 15%;
+}
+.content {
+    margin: 0 0 150px 25%;
+    background: #3594cb;
+    color: #fff;
+    padding: 2em;
+    font-size: 1.2em;
+    font-weight: 300;
+    line-height: 1.4;
+    position: relative;
+    border-radius: 5px;
+}
+.content p:after {
+    right: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-right-color: #3594cb;
+    border-width: 10px;
+    top: 10px;
+}
+.timeline:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    background: #afdcf8;
+    left: 20%;
+    margin-left: -10px;
+}
+.time span {
+    display: block;
+    text-align: right;
+}
+.time span:first-child {
+    font-size: 0.9em;
+    color: #bdd0db;
+}
+.time span:last-child {
+    color: #6cbfee;
+    font-size: 2.9em;
+}
+.middle {
+    width: 40px;
+    height: 40px;
+    font-family: 'ecoico';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    font-size: 1.4em;
+    line-height: 40px;
+    -webkit-font-smoothing: antialiased;
+    position: absolute;
+    color: #fff;
+    background: #46a4da;
+    border-radius: 50%;
+    box-shadow: 0 0 0 8px #afdcf8;
+    text-align: center;
+    left: 20%;
+    top: 0;
+    margin: 0 0 0 -25px;
+}
+.middle:before {
+    content: "\e000";
+}
