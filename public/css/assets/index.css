@@ -6,7 +6,7 @@ body {
 }
 #container {
     max-width: 810px;
-    margin-left: 270px;
+    margin: 0 auto;
 }
 #contents {
     margin: 0 auto;
@@ -111,4 +111,61 @@ body {
 /* sign in */
 .signup-body, .signin-body {
     background: url(../../images/low_contrast_linen.png) repeat 0 0;
+}
+.post-create {
+    background-color: #f5f5f5;
+    padding: 20px 20px 15px 20px;
+}
+#post-content {
+    width: 100%;
+    height: 85px;
+    outline: none;
+    border: 1px solid #e4e4e4;
+    font-family: "Lato";
+    font-size: 16px;
+}
+.bottom-bar {
+    display: block;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #ffffff;
+    position: relative;
+    left:27px;
+    top:-1px;
+}
+.share-list {
+    padding-left: 10px;
+    margin-top: 5px;
+}
+.share-list li a {
+    display: block;
+    height: 54px;
+    width: 54px;
+    text-align: center;
+    text-decoration: none;
+    color: rgba(0,0,0,.3);
+}
+.share-list li a p:first-child {
+    font-size: 24px;
+}
+.share-list li a p:last-child {
+    font-size: 12px;
+}
+.share-active {
+    font-weight: bold;
+    color: #333333;
+}
+.share-list li {
+    height: 54px;
+    width: 54px;
+    padding: 0;
+    margin: 0;
+}
+.share-pencil {
+    color: #449d44;
+}
+a.share-default:hover {
+    color: rgba(0,0,0,.7);
 }

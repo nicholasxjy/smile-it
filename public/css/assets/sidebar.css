@@ -1,11 +1,3 @@
-.sidebar {
-    width: 225px;
-    position: fixed;
-    left: 0;
-    top: 66px;
-    background-color: #428bca;
-    bottom: 0;
-}
 .sidebar-top {
     padding: 30px 15px 10px 15px;
     text-align: center;
